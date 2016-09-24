@@ -1,5 +1,4 @@
-﻿using System;
-using Dagama.Sitemap.Robots;
+﻿using Dagama.Sitemap.Robots;
 
 namespace Dagama.Sitemap.Configuration
 {
@@ -9,12 +8,12 @@ namespace Dagama.Sitemap.Configuration
 
         public virtual string FileLocation { get; set; }
         
-        bool IRobotsGenerationParameters.ShouldSaveToRobotsFile()
+        public bool ShouldSaveToRobotsFile()
         {
             return SaveToRobotsFile;
         }
 
-        string IRobotsGenerationParameters.FileLocation()
+        public string GetFileLocation()
         {
             return FileLocation;
         }
