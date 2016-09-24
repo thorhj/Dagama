@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dagama.Sitemap
+namespace Dagama.Sitemap.SitemapGeneration
 {
-    public class Class1
+    public interface ISitemapGenerationParameters
     {
+        IEnumerable<ISite> GetSites();
     }
 }

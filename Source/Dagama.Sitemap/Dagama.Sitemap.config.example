@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  <sitecore>
+    <dagama>
+      <sitemap>
+        <itemFacade type="Dagama.Sitemap.Configuration.ConfigurationItemFacade, Dagama.Sitemap">
+          <includeItemField>IncludeInSitemapXml</includeItemField>
+          <changeFrequencyField>SitemapXmlChangeFrequency</changeFrequencyField>
+          <priorityField>SitemapXmlPriority</priorityField>
+        </itemFacade>
+
+        <robotsGenerationParameters type="Dagama.Sitemap.Configuration.ConfigurationRobotsGenerationParameters, Dagama.Sitemap">
+          <saveToRobotsFile>true</saveToRobotsFile>
+          <!-- Relative to website root folder -->
+          <fileLocation>robots.txt</fileLocation>
+        </robotsGenerationParameters>
+
+        <sitemapGenerationParameters type="Dagama.Sitemap.Configuration.ConfigurationSitemapGenerationParameters, Dagama.Sitemap">
+          <sites hint="raw:AddSite">
+            <site type="Dagama.Sitemap.Configuration.ConfigurationSite, Dagama.Sitemap">
+              <name>website</name>
+              <database>web</database>
+              <languages hint="list:AddLanguage">
+                <language>da</language>
+                <language>en</language>
+              </languages>
+            </site>
+          </sites>
+        </sitemapGenerationParameters>
+
+        <searchEngineNotificationParameters type="Dagama.Sitemap.Configuration.ConfigurationSearchEngineNotificationParameters, Dagama.Sitemap">
+          <notifySearchEngines>true</notifySearchEngines>
+          <searchEngines hint="raw:AddSearchEngine">
+            <searchEngine>
+              <name>Google</name>
+              <pingAddress>http://www.google.com/webmasters/sitemaps/ping</pingAddress>
+            </searchEngine>
+            <searchEngine>
+              <name>Bing</name>
+              <pingAddress>http://www.bing.com/webmaster/ping.aspx</pingAddress>
+            </searchEngine>
+            <searchEngine>
+              <name>Ask</name>
+              <pingAddress>http://submissions.ask.com/ping</pingAddress>
+            </searchEngine>
+          </searchEngines>
+        </searchEngineNotificationParameters>
+      </sitemap>
+    </dagama>
+    
+    <events timingLevel="custom">
+      <event name="publish:end">
+        <handler type="Dagama.Sitemap.PublishHandler, Dagama.Sitemap" method="Execute" />
+      </event>
+    </events>
+  </sitecore>
+</configuration>
