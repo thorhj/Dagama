@@ -1,6 +1,8 @@
 ﻿using System;
 using JetBrains.Annotations;
 using Sitecore.Data.Items;
+using Sitecore.Globalization;
+using Sitecore.Sites;
 
 namespace Dagama.Sitemap.Items
 {
@@ -45,8 +47,10 @@ namespace Dagama.Sitemap.Items
         /// The item passed to this method is expected to not be null.
         /// </summary>
         /// <param name="item">A non-null Sitecore item.</param>
+        /// <param name="site">The site for the item URL.</param>
+        /// <param name="language">The language for the item URL.</param>
         /// <returns>The URL of the item.</returns>
-        string GetUrl([NotNull] Item item);
+        string GetUrl([NotNull] Item item, [NotNull] SiteContext site, [NotNull] Language language);
 
         /// <summary>
         /// Get the date and time of the last modification made to this item. If the value is null,

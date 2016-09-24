@@ -11,6 +11,8 @@ using Sitecore.Configuration;
 using Sitecore.Data;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
+using Sitecore.Globalization;
+using Sitecore.Sites;
 
 namespace Dagama.Sitemap
 {
@@ -49,6 +51,7 @@ namespace Dagama.Sitemap
                 if (siteConfiguration == null) continue;
                 foreach (var language in siteConfiguration.GetLanguages())
                 {
+                    if (language == null) continue;
                     var site = Factory.GetSite(siteConfiguration.GetName());
                     if (site == null)
                     {
@@ -77,7 +80,7 @@ namespace Dagama.Sitemap
                     foreach (var item in sitemapItems ?? Enumerable.Empty<Item>())
                     {
                         if (item == null) continue;
-                        AppendItemXml(item, stringBuilder);
+                        AppendItemXml(item, site, language, stringBuilder);
                     }
                 }
             }
@@ -87,13 +90,14 @@ namespace Dagama.Sitemap
             return sitemapXml;
         }
 
-        private void AppendItemXml([JetBrains.Annotations.NotNull] Item item, [JetBrains.Annotations.NotNull] StringBuilder stringBuilder)
+        private void AppendItemXml([JetBrains.Annotations.NotNull] Item item,
+            [JetBrains.Annotations.NotNull] SiteContext site, [JetBrains.Annotations.NotNull] Language language, [JetBrains.Annotations.NotNull] StringBuilder stringBuilder)
         {
             var lastmod = _configurationProvider.ItemFacade.GetLastModified(item)?.ToString("yyyy-MM-ddTHH:mm:sszzz");
 
             var changefreq = _configurationProvider.ItemFacade.GetChangeFrequency(item);
             var priority = _configurationProvider.ItemFacade.GetPriority(item);
-            var url = _configurationProvider.ItemFacade.GetUrl(item);
+            var url = _configurationProvider.ItemFacade.GetUrl(item, site, language);
 
             stringBuilder.Append("<url>");
             stringBuilder.Append("<loc>");
