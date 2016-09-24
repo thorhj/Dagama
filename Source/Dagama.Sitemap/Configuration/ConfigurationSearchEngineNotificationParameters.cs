@@ -21,7 +21,7 @@ namespace Dagama.Sitemap.Configuration
 
         public virtual IEnumerable<ISearchEngine> GetSearchEngines()
         {
-
+            return SearchEngines ?? Enumerable.Empty<ISearchEngine>();
         }
 
         public void AddSearchEngine(XmlNode node)

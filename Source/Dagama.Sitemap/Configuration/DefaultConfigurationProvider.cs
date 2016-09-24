@@ -1,4 +1,5 @@
-﻿using Dagama.Sitemap.Items;
+﻿using System;
+using Dagama.Sitemap.Items;
 using Dagama.Sitemap.Robots;
 using Dagama.Sitemap.SearchEngines;
 using Dagama.Sitemap.SitemapGeneration;
@@ -94,24 +95,36 @@ namespace Dagama.Sitemap.Configuration
         [NotNull]
         private readonly object _searchEngineNotificationParametersInitLock = new object();
 
+        [NotNull]
         protected virtual IItemFacade InitializeItemFacadeFromConfig()
         {
-            return (IItemFacade) Factory.CreateObject("/sitecore/dagama/sitemap/itemFacade", true);
+            var result = (IItemFacade) Factory.CreateObject("/sitecore/dagama/sitemap/itemFacade", true);
+            if (result == null) throw new InvalidOperationException("itemFacade");
+            return result;
         }
 
+        [NotNull]
         protected virtual IRobotsGenerationParameters InitializeRobotsGenerationParametersFromConfig()
         {
-            return (IRobotsGenerationParameters)Factory.CreateObject("/sitecore/dagama/sitemap/robotsGenerationParameters", true);
+            var result = (IRobotsGenerationParameters)Factory.CreateObject("/sitecore/dagama/sitemap/robotsGenerationParameters", true);
+            if (result == null) throw new InvalidOperationException("robotsGenerationParameters");
+            return result;
         }
 
+        [NotNull]
         protected virtual ISitemapGenerationParameters InitializeSitemapGenerationParametersFromConfig()
         {
-            return (ISitemapGenerationParameters)Factory.CreateObject("/sitecore/dagama/sitemap/sitemapGenerationParameters", true);
+            var result = (ISitemapGenerationParameters)Factory.CreateObject("/sitecore/dagama/sitemap/sitemapGenerationParameters", true);
+            if (result == null) throw new InvalidOperationException("sitemapGenerationParameters");
+            return result;
         }
 
+        [NotNull]
         protected virtual ISearchEnginesNotificationParameters InitializeSearchEnginesNotificationParametersFromConfig()
         {
-            return (ISearchEnginesNotificationParameters)Factory.CreateObject("/sitecore/dagama/sitemap/searchEnginesNotificationParameters", true);
+            var result = (ISearchEnginesNotificationParameters)Factory.CreateObject("/sitecore/dagama/sitemap/searchEnginesNotificationParameters", true);
+            if (result == null) throw new InvalidOperationException("searchEnginesNotificationParameters");
+            return result;
         }
     }
 }

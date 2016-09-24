@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Sitecore.Globalization;
 
 namespace Dagama.Sitemap.SitemapGeneration
@@ -13,6 +14,7 @@ namespace Dagama.Sitemap.SitemapGeneration
 
         string GetDatabase();
 
+        [NotNull]
         IEnumerable<Language> GetLanguages();
     }
 }

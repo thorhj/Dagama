@@ -4,7 +4,9 @@ using Dagama.Sitemap.Items;
 using Sitecore;
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
+using Sitecore.Globalization;
 using Sitecore.Links;
+using Sitecore.Sites;
 
 namespace Dagama.Sitemap.Configuration
 {
@@ -44,9 +46,16 @@ namespace Dagama.Sitemap.Configuration
             return null;
         }
 
-        public virtual string GetUrl(Item item)
+        public virtual string GetUrl(Item item, SiteContext site, Language language)
         {
             Assert.IsNotNull(item, "The item was null.");
+
+            var urlOptions = LinkManager.GetDefaultUrlOptions() ?? new UrlOptions();
+            urlOptions.AlwaysIncludeServerUrl = true;
+            urlOptions.LanguageEmbedding = LanguageEmbedding.AsNeeded;
+            urlOptions.Site = site;
+            urlOptions.SiteResolving = true;
+            urlOptions.Language = language;
             return LinkManager.GetItemUrl(item);
         }
 
