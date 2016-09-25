@@ -31,24 +31,24 @@ namespace Dagama.Sitemap.Configuration
         private IItemFacade _itemFacade;
         [NotNull] private readonly object _itemFacadeInitLock = new object();
 
-        public IRobotsGenerationParameters RobotsGenerationParameters
+        public IRobotsGenerator RobotsGenerator
         {
             get
             {
-                if (_robotsGenerationParameters == null)
+                if (_robotsGenerator == null)
                 {
                     lock (_robotsGenerationParametersInitLock)
                     {
-                        if (_robotsGenerationParameters == null)
+                        if (_robotsGenerator == null)
                         {
-                            _robotsGenerationParameters = InitializeRobotsGenerationParametersFromConfig();
+                            _robotsGenerator = InitializeRobotsGenerationParametersFromConfig();
                         }
                     }
                 }
-                return _robotsGenerationParameters;
+                return _robotsGenerator;
             }
         }
-        private IRobotsGenerationParameters _robotsGenerationParameters;
+        private IRobotsGenerator _robotsGenerator;
         [NotNull] private readonly object _robotsGenerationParametersInitLock = new object();
 
         public ISitemapGenerationParameters SitemapGenerationParameters
@@ -72,26 +72,26 @@ namespace Dagama.Sitemap.Configuration
         [NotNull] private readonly object _sitemapGenerationParametersInitLock = new object();
 
 
-        public ISearchEnginesNotificationParameters SearchEnginesNotificationParameters
+        public ISearchEnginesNotifier SearchEnginesNotifier
         {
             get
             {
-                if (_searchEnginesNotificationParameters == null)
+                if (_searchEnginesNotifier == null)
                 {
                     lock (_searchEngineNotificationParametersInitLock)
                     {
-                        if (_searchEnginesNotificationParameters == null)
+                        if (_searchEnginesNotifier == null)
                         {
-                            _searchEnginesNotificationParameters =
+                            _searchEnginesNotifier =
                                 InitializeSearchEnginesNotificationParametersFromConfig();
                         }
                     }
                 }
-                return _searchEnginesNotificationParameters;
+                return _searchEnginesNotifier;
             }
         }
 
-        private ISearchEnginesNotificationParameters _searchEnginesNotificationParameters;
+        private ISearchEnginesNotifier _searchEnginesNotifier;
         [NotNull]
         private readonly object _searchEngineNotificationParametersInitLock = new object();
 
@@ -104,9 +104,9 @@ namespace Dagama.Sitemap.Configuration
         }
 
         [NotNull]
-        protected virtual IRobotsGenerationParameters InitializeRobotsGenerationParametersFromConfig()
+        protected virtual IRobotsGenerator InitializeRobotsGenerationParametersFromConfig()
         {
-            var result = (IRobotsGenerationParameters)Factory.CreateObject("/sitecore/dagama/sitemap/robotsGenerationParameters", true);
+            var result = (IRobotsGenerator)Factory.CreateObject("/sitecore/dagama/sitemap/robotsGenerator", true);
             if (result == null) throw new InvalidOperationException("robotsGenerationParameters");
             return result;
         }
@@ -120,9 +120,9 @@ namespace Dagama.Sitemap.Configuration
         }
 
         [NotNull]
-        protected virtual ISearchEnginesNotificationParameters InitializeSearchEnginesNotificationParametersFromConfig()
+        protected virtual ISearchEnginesNotifier InitializeSearchEnginesNotificationParametersFromConfig()
         {
-            var result = (ISearchEnginesNotificationParameters)Factory.CreateObject("/sitecore/dagama/sitemap/searchEnginesNotificationParameters", true);
+            var result = (ISearchEnginesNotifier)Factory.CreateObject("/sitecore/dagama/sitemap/searchEnginesNotifier", true);
             if (result == null) throw new InvalidOperationException("searchEnginesNotificationParameters");
             return result;
         }

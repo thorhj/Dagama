@@ -42,7 +42,8 @@ namespace Dagama.Sitemap.Items
         decimal? GetPriority([NotNull] Item item);
 
         /// <summary>
-        /// Get the URL of the item to be used in the Sitemap XML.
+        /// Get the URL of the item to be used in the Sitemap XML. If the item does not exists or
+        /// is invalid for the given site and language, this method should return null.
         /// 
         /// The item passed to this method is expected to not be null.
         /// </summary>

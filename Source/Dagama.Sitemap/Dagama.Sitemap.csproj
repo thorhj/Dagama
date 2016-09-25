@@ -50,23 +50,25 @@
     <Compile Include="ChangeFrequency.cs" />
     <Compile Include="Configuration\DefaultConfigurationProvider.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
-    <Compile Include="IO\IDatabaseAdapter.cs" />
-    <Compile Include="IO\IDatabaseAdapterFactory.cs" />
-    <Compile Include="IO\IFileHandler.cs" />
+    <Compile Include="Items\IDatabaseAdapter.cs" />
+    <Compile Include="Items\IDatabaseAdapterFactory.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="PublishHandler.cs" />
     <Compile Include="Configuration\ConfigurationItemFacade.cs" />
-    <Compile Include="Configuration\ConfigurationRobotsGenerationParameters.cs" />
-    <Compile Include="Configuration\ConfigurationSearchEngineNotificationParameters.cs" />
+    <Compile Include="Configuration\ConfigurationRobotsGenerator.cs" />
+    <Compile Include="Configuration\ConfigurationSearchEngineNotifier.cs" />
     <Compile Include="Configuration\ConfigurationSite.cs" />
     <Compile Include="Configuration\ConfigurationSitemapGenerationParameters.cs" />
     <Compile Include="Items\IItemFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Robots\IRobotsGenerationParameters.cs" />
+    <Compile Include="Robots\IRobotsGenerator.cs" />
     <Compile Include="SearchEngines\ISearchEngine.cs" />
-    <Compile Include="SearchEngines\ISearchEnginesNotificationParameters.cs" />
+    <Compile Include="SearchEngines\ISearchEnginesNotifier.cs" />
     <Compile Include="SitemapGeneration\ISite.cs" />
     <Compile Include="SitemapGeneration\ISitemapGenerationParameters.cs" />
+    <Compile Include="SitemapGeneration\ISitemapXmlGenerator.cs" />
+    <Compile Include="SitemapGeneration\SitemapXmlGenerator.cs" />
+    <Compile Include="Sites\ISiteContextFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Dagama.Sitemap.config" />

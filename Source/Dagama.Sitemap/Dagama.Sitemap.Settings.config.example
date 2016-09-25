@@ -9,13 +9,14 @@
           <priorityField>SitemapXmlPriority</priorityField>
         </itemFacade>
 
-        <robotsGenerationParameters type="Dagama.Sitemap.Configuration.ConfigurationRobotsGenerationParameters, Dagama.Sitemap">
-          <saveToRobotsFile>true</saveToRobotsFile>
+        <robotsGenerator type="Dagama.Sitemap.Configuration.ConfigurationRobotsGenerator, Dagama.Sitemap">
+          <shouldSaveToRobotsFile>true</shouldSaveToRobotsFile>
           <!-- Relative to website root folder -->
           <fileLocation>robots.txt</fileLocation>
-        </robotsGenerationParameters>
+        </robotsGenerator>
 
         <sitemapGenerationParameters type="Dagama.Sitemap.Configuration.ConfigurationSitemapGenerationParameters, Dagama.Sitemap">
+          <sitemapLocation>Sitemap.xml</sitemapLocation>
           <sites hint="raw:AddSite">
             <!-- The first site will be used as the main URL, for which the search engines are notified -->
             <site type="Dagama.Sitemap.Configuration.ConfigurationSite, Dagama.Sitemap">
@@ -29,8 +30,8 @@
           </sites>
         </sitemapGenerationParameters>
 
-        <searchEngineNotificationParameters type="Dagama.Sitemap.Configuration.ConfigurationSearchEngineNotificationParameters, Dagama.Sitemap">
-          <notifySearchEngines>true</notifySearchEngines>
+        <searchEngineNotifier type="Dagama.Sitemap.Configuration.ConfigurationSearchEngineNotifier, Dagama.Sitemap">
+          <shouldNotifySearchEngines>true</shouldNotifySearchEngines>
           <searchEngines hint="raw:AddSearchEngine">
             <searchEngine>
               <name>Google</name>
@@ -45,7 +46,7 @@
               <pingAddress>http://submissions.ask.com/ping</pingAddress>
             </searchEngine>
           </searchEngines>
-        </searchEngineNotificationParameters>
+        </searchEngineNotifier>
       </sitemap>
     </dagama>
   </sitecore>

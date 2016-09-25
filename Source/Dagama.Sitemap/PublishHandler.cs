@@ -13,8 +13,8 @@ namespace Dagama.Sitemap
             {
                 throw new InvalidOperationException("Could not load configuration provider.");
             }
-            var generator = new Generator(configurationProvider);
-            generator.Generate();
+            //var generator = new Generator(configurationProvider, new Data);
+            //generator.Generate();
         }
     }
 }

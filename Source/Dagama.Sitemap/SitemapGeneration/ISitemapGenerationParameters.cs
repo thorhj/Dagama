@@ -11,5 +11,7 @@ namespace Dagama.Sitemap.SitemapGeneration
         /// <returns>A list of sites for which to build the Sitemap XML.</returns>
         [NotNull]
         IEnumerable<ISite> GetSites();
+        
+        string GetSitemapLocation();
     }
 }

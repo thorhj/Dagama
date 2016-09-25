@@ -12,12 +12,12 @@ namespace Dagama.Sitemap.Configuration
         IItemFacade ItemFacade { get; }
 
         [NotNull]
-        IRobotsGenerationParameters RobotsGenerationParameters { get; }
+        IRobotsGenerator RobotsGenerator { get; }
 
         [NotNull]
         ISitemapGenerationParameters SitemapGenerationParameters { get; }
 
         [NotNull]
-        ISearchEnginesNotificationParameters SearchEnginesNotificationParameters { get; }
+        ISearchEnginesNotifier SearchEnginesNotifier { get; }
     }
 }
