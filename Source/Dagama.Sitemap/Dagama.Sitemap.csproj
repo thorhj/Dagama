@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChangeFrequency.cs" />
+    <Compile Include="Configuration\ConfigurationSearchengine.cs" />
     <Compile Include="Configuration\DefaultConfigurationProvider.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Items\IDatabaseAdapter.cs" />

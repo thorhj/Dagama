@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using Dagama.Sitemap.SitemapGeneration;
+using Sitecore.Configuration;
 
 namespace Dagama.Sitemap.Configuration
 {
@@ -28,8 +28,8 @@ namespace Dagama.Sitemap.Configuration
             {
                 Sites = new List<ISite>();
             }
-            
-            throw  new NotImplementedException();
+            var site = Factory.CreateObject<ConfigurationSite>(node);
+            Sites.Add(site);
         }
     }
 }

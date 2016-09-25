@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using Dagama.Sitemap.SearchEngines;
+using Sitecore.Configuration;
 
 namespace Dagama.Sitemap.Configuration
 {
@@ -16,7 +14,12 @@ namespace Dagama.Sitemap.Configuration
 
         public void AddSearchEngine(XmlNode node)
         {
-            throw new NotImplementedException();
+            if (SearchEngines == null)
+            {
+                SearchEngines = new List<ISearchEngine>();
+            }
+            var searchEngine = Factory.CreateObject<ConfigurationSearchEngine>(node);
+            SearchEngines.Add(searchEngine);
         }
 
         public virtual void NotifySearchEngines()

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dagama.Sitemap.SitemapGeneration;
-using Sitecore.Diagnostics;
 using Sitecore.Globalization;
 
 namespace Dagama.Sitemap.Configuration
@@ -39,7 +35,7 @@ namespace Dagama.Sitemap.Configuration
 
         public IEnumerable<Language> GetLanguages()
         {
-            return Languages;
+            return Languages ?? Enumerable.Empty<Language>();
         }
     }
 }
