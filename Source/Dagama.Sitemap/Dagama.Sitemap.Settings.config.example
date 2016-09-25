@@ -17,6 +17,7 @@
 
         <sitemapGenerationParameters type="Dagama.Sitemap.Configuration.ConfigurationSitemapGenerationParameters, Dagama.Sitemap">
           <sites hint="raw:AddSite">
+            <!-- The first site will be used as the main URL, for which the search engines are notified -->
             <site type="Dagama.Sitemap.Configuration.ConfigurationSite, Dagama.Sitemap">
               <name>website</name>
               <database>web</database>
@@ -47,11 +48,5 @@
         </searchEngineNotificationParameters>
       </sitemap>
     </dagama>
-    
-    <events timingLevel="custom">
-      <event name="publish:end">
-        <handler type="Dagama.Sitemap.PublishHandler, Dagama.Sitemap" method="Execute" />
-      </event>
-    </events>
   </sitecore>
 </configuration>

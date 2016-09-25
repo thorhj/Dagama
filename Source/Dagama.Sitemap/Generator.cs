@@ -13,6 +13,7 @@ using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Globalization;
 using Sitecore.Sites;
+using NotNullAttribute = JetBrains.Annotations.NotNullAttribute;
 
 namespace Dagama.Sitemap
 {
@@ -20,10 +21,10 @@ namespace Dagama.Sitemap
     {
         private const string SitemapFileLocation = "Sitemap.xml";
 
-        [JetBrains.Annotations.NotNull] private readonly IConfigurationProvider _configurationProvider;
+        [NotNull] private readonly IConfigurationProvider _configurationProvider;
 
 
-        internal Generator([JetBrains.Annotations.NotNull] IConfigurationProvider configurationProvider)
+        internal Generator([NotNull] IConfigurationProvider configurationProvider)
         {
             if (configurationProvider == null) throw new ArgumentNullException(nameof(configurationProvider));
             _configurationProvider = configurationProvider;
@@ -37,6 +38,7 @@ namespace Dagama.Sitemap
             NotifySearchEngines();
         }
 
+        [NotNull]
         private string CreateSitemap()
         {
             const string sitemapXmlRootStartTag =
@@ -45,25 +47,28 @@ namespace Dagama.Sitemap
 
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(sitemapXmlRootStartTag);
-            string primaryUrl = null;
             foreach (var siteConfiguration in _configurationProvider.SitemapGenerationParameters.GetSites())
             {
                 if (siteConfiguration == null) continue;
                 foreach (var language in siteConfiguration.GetLanguages())
                 {
                     if (language == null) continue;
+
+                    // TODO: mock site factory
                     var site = Factory.GetSite(siteConfiguration.GetName());
                     if (site == null)
                     {
                         throw new InvalidOperationException($"The site {siteConfiguration.GetName()} was not available.");
                     }
 
+                    // TODO: Mock database factory
                     var database = Database.GetDatabase(siteConfiguration.GetDatabase());
                     if (database == null)
                     {
                         throw new InvalidOperationException($"The database {siteConfiguration.GetDatabase()} specified for site {siteConfiguration.GetName()} was not available.");
                     }
 
+                    // TODO: Mock database
                     var rootItem = database.GetItem(site.StartPath, language);
                     if (rootItem == null)
                     {
@@ -71,6 +76,7 @@ namespace Dagama.Sitemap
                         continue;
                     }
 
+                    // TODO: Mock item
                     var sitemapItems = rootItem.Axes?
                         .GetDescendants()?
                         .Where(_configurationProvider.ItemFacade.IsIncludedInSitemap)
@@ -90,8 +96,8 @@ namespace Dagama.Sitemap
             return sitemapXml;
         }
 
-        private void AppendItemXml([JetBrains.Annotations.NotNull] Item item,
-            [JetBrains.Annotations.NotNull] SiteContext site, [JetBrains.Annotations.NotNull] Language language, [JetBrains.Annotations.NotNull] StringBuilder stringBuilder)
+        private void AppendItemXml([NotNull] Item item,
+            [NotNull] SiteContext site, [NotNull] Language language, [NotNull] StringBuilder stringBuilder)
         {
             var lastmod = _configurationProvider.ItemFacade.GetLastModified(item)?.ToString("yyyy-MM-ddTHH:mm:sszzz");
 
@@ -126,7 +132,8 @@ namespace Dagama.Sitemap
             stringBuilder.Append("</url>");
         }
 
-        private void SaveSitemapToFile([JetBrains.Annotations.NotNull] string sitemap)
+        // TODO: Mock file handler
+        private void SaveSitemapToFile([NotNull] string sitemap)
         {
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(sitemap);
@@ -138,6 +145,7 @@ namespace Dagama.Sitemap
             xmlDocument.Save(filename);
         }
 
+        // TODO: Mock file handler
         private void UpdateRobotsFile()
         {
             if (!_configurationProvider.RobotsGenerationParameters.ShouldSaveToRobotsFile())
@@ -176,6 +184,7 @@ namespace Dagama.Sitemap
             }
         }
 
+        // TODO: Mock notifier
         private void NotifySearchEngines()
         {
             if (!_configurationProvider.SearchEnginesNotificationParameters.ShouldNotifySearchEngines())
@@ -188,7 +197,7 @@ namespace Dagama.Sitemap
             //    try
             //    {
             //        var httpClient = new HttpClient();
-            //        var uri = $"{searchEngine.GetPingAddress()}?sitemap={baseUrl}/Sitemap.xml";
+            //        var uri = $"{searchEngine.GetPingAddress()}?sitemap={GETTHEMAINSITEBASEURLHERE}/Sitemap.xml";
             //        var request = httpClient.GetAsync(uri);
             //        if (request.Result.StatusCode != HttpStatusCode.OK)
             //        {

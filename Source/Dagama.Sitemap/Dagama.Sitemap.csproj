@@ -50,6 +50,9 @@
     <Compile Include="ChangeFrequency.cs" />
     <Compile Include="Configuration\DefaultConfigurationProvider.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
+    <Compile Include="IO\IDatabaseAdapter.cs" />
+    <Compile Include="IO\IDatabaseAdapterFactory.cs" />
+    <Compile Include="IO\IFileHandler.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="PublishHandler.cs" />
     <Compile Include="Configuration\ConfigurationItemFacade.cs" />
@@ -66,7 +69,8 @@
     <Compile Include="SitemapGeneration\ISitemapGenerationParameters.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Dagama.Sitemap.config.example" />
+    <None Include="Dagama.Sitemap.config" />
+    <None Include="Dagama.Sitemap.Settings.config.example" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

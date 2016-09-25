@@ -1,4 +1,6 @@
 ﻿using System;
+using Dagama.Sitemap.Configuration;
+using Sitecore.Configuration;
 
 namespace Dagama.Sitemap
 {
@@ -6,7 +8,13 @@ namespace Dagama.Sitemap
     {
         public virtual void Execute()
         {
-            throw new NotImplementedException();
+            var configurationProvider = (IConfigurationProvider)Factory.CreateObject("/sitecore/dagama/sitemap/configurationProvider", true);
+            if (configurationProvider == null)
+            {
+                throw new InvalidOperationException("Could not load configuration provider.");
+            }
+            var generator = new Generator(configurationProvider);
+            generator.Generate();
         }
     }
 }
